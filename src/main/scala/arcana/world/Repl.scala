@@ -9,13 +9,7 @@ object Repl {
   val fooEvaluat = (input: String) => println(input)
   val fooTypeEvaluat = (input: String) => println(input + ": type")
   def evaluatArguments(args: Array[String]): Unit = {
-    var typeInfo = false
-    for (arg <- args) {
-      arg match {
-        // Add any argument here
-        case "--type" => typeInfo = true
-      }
-    }
+    val needTypeInfo = args.foldLeft(false)((flag, arg) => flag || arg.equals("--type"))
     ArgumentFlags(typeInfo) match {
       // TODO change fooEvaluat
       case ArgumentFlags(true) => startRepl(fooTypeEvaluat)
