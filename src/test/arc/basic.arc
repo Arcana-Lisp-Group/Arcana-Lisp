@@ -3,3 +3,6 @@
 (def res (* length pi))
 
 (if (= 2 3) 4 5)
+
+(defn f [a]
+  a)

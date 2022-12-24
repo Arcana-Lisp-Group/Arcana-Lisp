@@ -48,7 +48,8 @@ class Lexer(code: String, options: LexerOptions) {
     val num = str.substring(start.column).takeWhile((c) => c.isDigit)
     val end = start :+ num.length()
 
-    if ((str(end.column) == '.' || str(end.column) == 'e' || str(end.column) == 'E') && end.column + 1 != str.length()) {
+    if ((str(end.column) == '.' || str(end.column) == 'e' || str(end.column) == 'E') &&
+         end.column + 1 != str.length() && str(end.column + 1).isDigit) {
       parseNumericLiteral(str, Position(start.line, end.column + 1), false) match {
         case ((ErrorToken(info), Some(loc)), next) => ((ErrorToken(info), createLocation(start, loc.end)), next)
         case ((ErrorToken(info), None), next) => ((ErrorToken(info), None), next)
