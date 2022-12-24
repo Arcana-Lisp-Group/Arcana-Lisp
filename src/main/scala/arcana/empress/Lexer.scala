@@ -15,8 +15,10 @@ class Lexer(code: String, options: LexerOptions) {
     if (column == str.length()) parsed
     else {
       if (str(column) == ';') parsed // comments
-      else if (punctuations.contains(str(column)))
-        parseLine(parsed :+ parsePunctuation(str(column), Position(line, column)), column + 1)
+      else if (punctuations.contains(str(column))) {
+        if (str(column).isSpaceChar) parseLine(parsed, column + 1) // skip space chars
+        else parseLine(parsed :+ parsePunctuation(str(column), Position(line, column)), column + 1)
+      }
       else if (str(column) == '"') parseStringLiteral(str, Position(line, column)) match {
         case (locatedToken, next) => parseLine(parsed :+ locatedToken, next)
       }
