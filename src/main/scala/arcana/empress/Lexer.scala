@@ -47,21 +47,20 @@ class Lexer(code: String, options: LexerOptions) {
   private def parseNumericLiteral(str: String, start: Position, allowDotOrE: Boolean = true): (LocatedToken, Int) = {
     val num = str.substring(start.column).takeWhile((c) => c.isDigit)
     val end = start :+ num.length()
-    val next = end.column + 1
 
-    if (str(next) == '.' || str(next) == 'e' || str(next) == 'E') {
-      parseNumericLiteral(str, Position(start.line, next + 1), false) match {
+    if ((str(end.column) == '.' || str(end.column) == 'e' || str(end.column) == 'E') && end.column + 1 != str.length()) {
+      parseNumericLiteral(str, Position(start.line, end.column + 1), false) match {
         case ((ErrorToken(info), Some(loc)), next) => ((ErrorToken(info), createLocation(start, loc.end)), next)
         case ((ErrorToken(info), None), next) => ((ErrorToken(info), None), next)
-        case ((LiteralToken(num2), Some(loc)), next) => ((LiteralToken(num + num2), createLocation(start, loc.end)), next)
-        case ((LiteralToken(num2), None), next) => ((LiteralToken(num + num2), None), next)
+        case ((LiteralToken(num2), Some(loc)), next) => ((LiteralToken(num + str(end.column) + num2), createLocation(start, loc.end)), next)
+        case ((LiteralToken(num2), None), next) => ((LiteralToken(num + str(end.column) + num2), None), next)
         case _ => throw new AssertionError("fatal error during parsing numeric literal.") // this will not happen
       }
     }
-    else if (punctuations.contains(str(next)) && str(next) != '(' && str(next) != '[' && str(next) != '{')
-      ((LiteralToken(num), createLocation(start, end)), next + 1)
+    else if (punctuations.contains(str(end.column)) && str(end.column) != '(' && str(end.column) != '[' && str(end.column) != '{')
+      ((LiteralToken(num), createLocation(start, end)), end.column)
     else // e.g. 123abc
-      ((ErrorToken("wrong numeric expression"), createLocation(start, end)), next + 1)
+      ((ErrorToken("wrong numeric expression"), createLocation(start, end)), end.column)
   }
 
   private def parseIdentifierAndKeyword(str: String, start: Position) = {
