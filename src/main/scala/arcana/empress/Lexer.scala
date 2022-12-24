@@ -33,15 +33,15 @@ class Lexer(code: String, options: LexerOptions) {
     else None
 
   private def parsePunctuation(punc: Char, position: Position) = 
-    (PunctuationToken(punc), createLocation(position, position))
+    (PunctuationToken(punc), createLocation(position, position :+ 1))
 
   private def parseStringLiteral(str: String, start: Position) = {
-    val end = str.indexOf('"', start.column + 1)
-    if (end == -1)
+    val end = str.indexOf('"', start.column + 1) + 1
+    if (end == 0)
       ((ErrorToken("missing \" in the string literal"),
-        createLocation(start, Position(start.line, str.length() - 1))), str.length())
+        createLocation(start, Position(start.line, str.length()))), str.length())
     else
-      ((LiteralToken(str.substring(start.column, end + 1)), createLocation(start, Position(start.line, end))), end + 1)
+      ((LiteralToken(str.substring(start.column, end)), createLocation(start, Position(start.line, end))), end)
   }
 
   private def parseNumericLiteral(str: String, start: Position, allowDotOrE: Boolean = true): (LocatedToken, Int) = {
@@ -69,8 +69,8 @@ class Lexer(code: String, options: LexerOptions) {
       !punctuations.contains(c))
     val end = start :+ res.length()
 
-    if (keywords.contains(res)) ((KeywordToken(res), createLocation(start, end)), end.column + 1)
-    else ((IdentifierToken(res), createLocation(start, end)), end.column + 1)
+    if (keywords.contains(res)) ((KeywordToken(res), createLocation(start, end)), end.column)
+    else ((IdentifierToken(res), createLocation(start, end)), end.column)
   }
 }
 
