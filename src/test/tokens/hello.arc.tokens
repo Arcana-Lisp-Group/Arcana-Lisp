@@ -1,5 +1,6 @@
 res:
-  PUNCTUATION("(") at [(1, 0) (1, 0)]
+  PUNCTUATION("(") at [(1, 0) (1, 1)]
   IDENTIFIER(println) at [(1, 1) (1, 8)]
-  LITERAL("Hello World!") at [(1, 9) (1, 22)]
-  PUNCTUATION(")") at [(1, 23) (1, 23)]
+  PUNCTUATION(" ") at [(1, 8) (1, 9)]
+  LITERAL("Hello World!") at [(1, 9) (1, 23)]
+  PUNCTUATION(")") at [(1, 23) (1, 24)]
