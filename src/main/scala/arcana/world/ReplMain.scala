@@ -1,13 +1,13 @@
 package arcana.world
 
-object Main {
+object ReplMain {
 
   // this main will run a REPL
   def main(args: Array[String]): Unit = {
     try {
-      new ArgumentEvaluator().evaluat(args);
+      new ReplOptionParser(args);
     } catch {
-      case e: ArgumentException => {
+      case e: ReplException => {
         println(e.getMessage())
       }
     }
