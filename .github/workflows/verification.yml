@@ -13,7 +13,6 @@ jobs:
       matrix:
         coq_version:
           - "8.15"
-          - "dev"
         ocaml_version:
           - "default"
       max-parallel: 4
