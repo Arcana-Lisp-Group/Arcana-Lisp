@@ -1,3 +1,6 @@
--R src/main/coq/arcana/justice Justice
+-Q src/main/coq/arcana/justice Justice
+
+-arg -w -arg -notation-overridden
+-native-compiler no
 
 src/main/coq/arcana/justice/language.v

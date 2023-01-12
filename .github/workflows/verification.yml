@@ -10,11 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        image:
-          - 'coqorg/coq:8.14'
-          - 'coqorg/coq:8.15'
-          - 'coqorg/coq:8.16'
       max-parallel: 4
       fail-fast: true
 
@@ -23,7 +18,7 @@ jobs:
     - uses: coq-community/docker-coq-action@v1
       with:
         opam_file: "coq.opam"
-        coq_version: "coqorg/coq:8.16"
+        coq_version: "8.15"
         ocaml_version: "default"
         export: "OPAMWITHTEST"
       env:
