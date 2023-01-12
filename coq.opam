@@ -9,6 +9,7 @@ install: [make "install"]
 run-test: [make "test"]
 
 depends: [
+  "ocaml" {>= "4.05.0"}
 ]
 
 tags: [
