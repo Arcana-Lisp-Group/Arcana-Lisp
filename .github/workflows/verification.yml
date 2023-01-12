@@ -18,7 +18,7 @@ jobs:
     - uses: coq-community/docker-coq-action@v1
       with:
         opam_file: "coq.opam"
-        coq_version: "8.15"
+        coq_version: "coqorg/coq:8.16"
         ocaml_version: "default"
         export: "OPAMWITHTEST"
       env:
