@@ -1,6 +1,3 @@
 -R src/main/coq/arcana/justice Justice
 
-src/main/coq/arcana/justice/helper.v
-src/main/coq/arcana/justice/semantics.v
-src/main/coq/arcana/justice/syntax.v
-src/main/coq/arcana/justice/typing.v
+src/main/coq/arcana/justice/verification.v
