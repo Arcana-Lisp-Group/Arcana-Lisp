@@ -50,3 +50,25 @@ Inductive type_of: type_env -> expr -> type -> Prop :=
   type_op_app: forall env: type_env, forall exp1 exp2: expr, forall t1 t2: type,
     (type_of env exp1 (Arrow t1 t2)) -> (type_of env (App exp1 exp2) t2).
 
+Inductive value: Set :=
+  Int: nat -> value | Func: identifier -> expr -> value.
+Inductive optional_value: Set :=
+  Err: optional_value | Res: value -> optional_value.
+
+Definition eval_env := expr -> optional_value.
+
+Inductive value_of: eval_env -> expr -> value -> Prop :=
+  eval_of_const: forall env: eval_env, forall n: nat, (value_of env (Const n) (Int n)) |
+  eval_of_ident: forall env: eval_env, forall id: identifier, forall v: value,
+    (env (Vari id)) = Res v -> (value_of env (Vari id) v) |
+  eval_of_lam: forall env: eval_env, forall id: identifier, forall exp: expr,
+    (value_of env (Lam id exp) (Func id exp)) |
+  eval_of_app: forall env: eval_env, forall t1 t2 t': expr, forall u v: value, forall id: identifier,
+    (value_of env t1 (Func id t')) -> (value_of env t2 u) -> (value_of env (App t1 t2) v).
+
+Theorem progress: forall exp: expr, forall ty: type, exists exp': expr, True.
+Admitted.
+
+Theorem preservation: forall exp: expr, True.
+Admitted.
+
