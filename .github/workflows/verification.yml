@@ -14,6 +14,6 @@ jobs:
     - uses: actions/checkout@v2
     - uses: coq-community/docker-coq-action@v1
       with:
-        opam_file: "coq.opam"
+        opam_file: "lang-verification.opam"
         coq_version: "8.15"
         ocaml_version: "4.07-flambda"
