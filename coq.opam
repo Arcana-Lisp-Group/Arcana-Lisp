@@ -12,7 +12,7 @@ run-test: [make "test"]
 
 depends: [
   "ocaml" {>= "4.05.0"}
-  "coq" {(>= "8.6") | (= "dev")}
+  "coq" {(>= "8.6")}
   "coq-mathcomp-ssreflect" {(>= "1.7.0")}
 ]
 
