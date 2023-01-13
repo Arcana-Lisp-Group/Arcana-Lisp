@@ -1,4 +1,4 @@
 test:: src/test/coq/verify.v
-	for f in $^ ; do \
-	  $(COQC) $$f ; \
-	done
+  for f in $^ ; do \
+    $(COQC) $(COQDEBUG) $(COQFLAGS) $(COQLIBS) $$f ; \
+  done

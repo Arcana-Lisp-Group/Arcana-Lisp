@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
 
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +17,3 @@ jobs:
         opam_file: "coq.opam"
         coq_version: "8.15"
         ocaml_version: "default"
-        export: "OPAMWITHTEST"
-      env:
-        OPAMWITHTEST: "true"
