@@ -16,7 +16,7 @@ class Lexer(code: String, options: LexerOptions) {
     else {
       if (str(column) == ';') parsed // comments
       else if (punctuations.contains(str(column))) {
-        if (str(column).isSpaceChar) parseLine(parsed, column + 1) // skip space chars
+        if (str(column).isSpaceChar || str(column) == ',') parseLine(parsed, column + 1) // skip space chars
         else parseLine(parsed :+ parsePunctuation(str(column), Position(line, column)), column + 1)
       }
       else if (str(column) == '"') parseStringLiteral(str, Position(line, column)) match {
@@ -81,10 +81,10 @@ object Lexer {
     new Lexer(code, options)
 
   private val keywords = List[String](
-    "def", "defn", "let", "if", "match" // TODO: Add more if need
+    "def", "fun", "let", "if"
   )
 
   private val punctuations = List[Char](
-    '(', ')', ' ', '\t', '\n', '\r', ':', '[', ']', '{', '}' // TODO: Are these symbols enough?
+    '(', ')', ' ', ',', '\t', '\n', '\r', ':', '[', ']', '{', '}'
   )
 }

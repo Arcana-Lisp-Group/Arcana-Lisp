@@ -8,7 +8,7 @@ class LexerTest extends AnyFunSuite {
   import LexerTest._
 
   testList.foreach((name) => test(name) {
-    val reader = new BufferedReader(new FileReader(s"src/test/arc/$name"))
+    val reader = new BufferedReader(new FileReader(s"src/test/al/$name"))
     val code = readFromFile(reader)
 
     val writer = new BufferedWriter(new FileWriter(s"src/test/tokens/$name.tokens"))
@@ -19,7 +19,7 @@ class LexerTest extends AnyFunSuite {
 
 object LexerTest {
   private val testList = List(
-    "hello.arc", "basic.arc", "lex-err.arc", "comments.arc"
+    "hello.al", "basic.al", "lex-err.al", "comments.al"
   )
 
   private def readFromFile(reader: BufferedReader, prev: String = ""): String = {
