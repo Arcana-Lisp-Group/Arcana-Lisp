@@ -3,6 +3,6 @@
         "**/target": true
     },
     "files.associations": {
-      "*.arc": "clojure",
+      "*.al": "clojure",
     },
 }
