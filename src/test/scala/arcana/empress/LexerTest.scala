@@ -19,7 +19,7 @@ class LexerTest extends AnyFunSuite {
 
 object LexerTest {
   private val testList = List(
-    "hello.al", "basic.al", "lex-err.al", "comments.al"
+    "hello.al", "basic.al", "lex-err.al", "comments.al", "types.al"
   )
 
   private def readFromFile(reader: BufferedReader, prev: String = ""): String = {
