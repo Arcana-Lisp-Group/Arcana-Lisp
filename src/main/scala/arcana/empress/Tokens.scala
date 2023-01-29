@@ -3,7 +3,7 @@ package arcana.empress
 sealed trait Token
 
 case class KeywordToken(keyword: String) extends Token
-case class PunctuationToken(punc: Char) extends Token
+case class PunctuationToken(val punc: Char) extends Token
 case class IdentifierToken(name: String) extends Token
 case class LiteralToken(value: String) extends Token {
   // TODO: Check types of literal values
