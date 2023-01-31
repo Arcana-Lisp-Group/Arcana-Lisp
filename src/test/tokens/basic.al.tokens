@@ -29,7 +29,7 @@ res:
   LITERAL(5) at [(5, 14) (5, 15)]
   PUNCTUATION(")") at [(5, 15) (5, 16)]
   PUNCTUATION("(") at [(7, 0) (7, 1)]
-  KEYWORD(defn) at [(7, 1) (7, 5)]
+  IDENTIFIER(defn) at [(7, 1) (7, 5)]
   IDENTIFIER(f) at [(7, 6) (7, 7)]
   PUNCTUATION("[") at [(7, 8) (7, 9)]
   IDENTIFIER(a) at [(7, 9) (7, 10)]
